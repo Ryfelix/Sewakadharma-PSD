@@ -3,9 +3,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 // Pages
 import Login from '@/pages/login/Login.vue'
 import Dashboard from '@/pages/dashboard/Dashboard.vue'
-import KnowledgeBase from '@/pages/knowledge/KnowledgeBase.vue'
-import AIConfiguration from '@/pages/ai-configuration/AIConfiguration.vue'
-import UserManagement from '@/pages/user-management/UserManagement.vue'
+import KnowledgeBase from '@/views/KnowledgeBase.vue'
+import AIConfiguration from '@/views/AIConfiguration.vue'
+import UserManagement from '@/views/UserManagement.vue'
 
 // Layout
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
@@ -48,11 +48,6 @@ const routes = [
         meta: { title: 'User Management - Admin Panel' }
       }
     ]
-  },
-  {
-    path: '/:pathMatch(.*)*',
-    name: 'NotFound',
-    component: () => import('@/pages/error/404.vue')
   }
 ]
 

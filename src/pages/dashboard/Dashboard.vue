@@ -7,7 +7,7 @@
         <div class="flex items-center justify-between">
           <div>
             <p class="text-gray-500 text-sm font-medium">Total Users</p>
-            <p class="text-3xl font-bold text-[#FC5649] mt-1">1,213</p>
+            <p class="text-3xl font-bold text-[#FC5649] mt-1">2</p>
           </div>
           <div class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center">
             <svg class="w-8 h-8 text-[#FC5649]" fill="currentColor" viewBox="0 0 20 20">
@@ -22,7 +22,7 @@
         <div class="flex items-center justify-between">
           <div>
             <p class="text-gray-500 text-sm font-medium">Total Conversations</p>
-            <p class="text-3xl font-bold text-[#FC5649] mt-1">27,342</p>
+            <p class="text-3xl font-bold text-[#FC5649] mt-1">27</p>
           </div>
           <div class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center">
             <svg class="w-8 h-8 text-[#FC5649]" fill="currentColor" viewBox="0 0 20 20">
@@ -37,7 +37,7 @@
         <div class="flex items-center justify-between">
           <div>
             <p class="text-gray-500 text-sm font-medium">Total Documents</p>
-            <p class="text-3xl font-bold text-[#FC5649] mt-1">25</p>
+            <p class="text-3xl font-bold text-[#FC5649] mt-1">7</p>
           </div>
           <div class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center">
             <svg class="w-8 h-8 text-[#FC5649]" fill="currentColor" viewBox="0 0 20 20">
@@ -49,32 +49,23 @@
     </div>
 
     <!-- Charts Section -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <!-- Line Chart -->
+    <div class="space-y-6">
+      <!-- Line Chart - Full Width -->
       <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
         <h3 class="text-lg font-semibold text-gray-800 mb-4">Monthly Active Users</h3>
         <div class="relative w-full" style="height: 280px;">
           <canvas ref="lineChart" class="absolute inset-0 w-full h-full"></canvas>
         </div>
       </div>
-
-      <!-- Pie Chart -->
-      <!-- <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-        <h3 class="text-lg font-semibold text-gray-800 mb-4">Total Conversations by Services</h3>
-        <div class="relative w-full" style="height: 280px;">
-          <canvas ref="pieChart" class="absolute inset-0 w-full h-full"></canvas>
-        </div>
-      </div> -->
     </div>
   </div>
 </template>
 
-<script setup>3
+<script setup>
 import { onMounted, ref } from "vue"
 import Chart from "chart.js/auto"
 
 const lineChart = ref(null)
-const pieChart = ref(null)
 
 onMounted(() => {
   // Initialize Line Chart
@@ -82,10 +73,10 @@ onMounted(() => {
   new Chart(lineCtx, {
     type: "line",
     data: {
-      labels: ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun"],
+      labels: ["Jun", "Jul", "Aug", "Sep", "Oct", "Nov"],
       datasets: [{
         label: "Users",
-        data: [100, 90, 95, 130, 170, 120],
+        data: [0, 0, 0, 2, 0, 0],
         borderColor: "#FC5649",
         backgroundColor: "rgba(252, 86, 73, 0.1)",
         tension: 0.4,
@@ -141,71 +132,6 @@ onMounted(() => {
         padding: {
           top: 10,
           bottom: 20
-        }
-      }
-    }
-  })
-
-  // Initialize Pie Chart
-  const pieCtx = pieChart.value.getContext("2d")
-  new Chart(pieCtx, {
-    type: "doughnut",
-    data: {
-      labels: ["Web Development", "SEO", "Performance Creative", "Digital Advertising"],
-      datasets: [{
-        data: [2058, 1000, 750, 300],
-        backgroundColor: ["#6366F1", "#10B981", "#FCBA40", "#FC5649"],
-        borderWidth: 0,
-        cutout: "60%"
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      layout: {
-        padding: {
-          top: 10,
-          bottom: 10,
-          left: 10,
-          right: 10
-        }
-      },
-      plugins: {
-        legend: {
-          display: true,
-          position: 'bottom',
-          labels: {
-            usePointStyle: true,
-            color: '#6B7280',
-            font: {
-              family: 'Poppins',
-              size: 10
-            },
-            padding: 12,
-            boxWidth: 12,
-            generateLabels: function(chart) {
-              const data = chart.data;
-              if (data.labels.length && data.datasets.length) {
-                return data.labels.map((label, i) => {
-                  const value = data.datasets[0].data[i];
-                  const color = data.datasets[0].backgroundColor[i];
-                  return {
-                    text: `${label}: ${value}`,
-                    fillStyle: color,
-                    pointStyle: 'circle'
-                  };
-                });
-              }
-              return [];
-            }
-          }
-        },
-        tooltip: {
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
-          titleColor: '#fff',
-          bodyColor: '#fff',
-          cornerRadius: 8,
-          displayColors: true
         }
       }
     }

@@ -81,8 +81,8 @@
 <script>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import axios from 'axios'
 import { Mail, Lock, Eye, EyeOff, MessageCircle } from 'lucide-vue-next'
+import { authAPI } from '@/services/api'
 import logo from '@/assets/image/Logo 100x100.png'
 
 export default {
@@ -102,30 +102,29 @@ export default {
     }
 
     const handleLogin = async () => {
-      isLoading.value = true
+      // Clear previous error
       error.value = ''
+      
+      // Validation
+      if (!username.value || !password.value) {
+        error.value = 'Please fill in all fields'
+        return
+      }
+
+      isLoading.value = true
 
       try {
-        const response = await axios.post(
-          `https://rag-chatbot-be.azurewebsites.net/auth/login`,
-          null, // body kosong
-          {
-            params: {
-              username: username.value,
-              password: password.value
-            }
-          }
-        )
-
-        // Simpan token ke localStorage
-        localStorage.setItem('authToken', response.data)
-
-        // Redirect ke dashboard
+        // Call real API
+        const response = await authAPI.login(username.value, password.value)
+        
+        console.log('✅ Login successful:', response.admin)
+        
+        // Redirect to dashboard
         router.push('/dashboard')
-
+        
       } catch (err) {
-        console.error(err)
-        error.value = 'Login gagal. Periksa username/password.'
+        console.error('❌ Login failed:', err)
+        error.value = err.message || 'Login failed. Please check your username and password.'
       } finally {
         isLoading.value = false
       }

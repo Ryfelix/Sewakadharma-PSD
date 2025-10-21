@@ -55,12 +55,6 @@
           <span class="font-medium">User Management</span>
         </router-link>
 
-        <!-- <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-[#FCBA40] hover:text-white transition-colors group">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
-          </svg>
-          <span class="font-medium">Reports</span>
-        </a> -->
       </nav>
     </aside>
 
@@ -110,7 +104,8 @@ const pageTitle = computed(() => {
   const titles = {
     '/dashboard': 'Dashboard',
     '/knowledge-base': 'Knowledge Base',
-    '/ai-configuration': 'AI Configuration'
+    '/ai-configuration': 'AI Configuration',
+    '/user-management': 'User Management'
   }
   return titles[route.path] || 'Dashboard'
 })
