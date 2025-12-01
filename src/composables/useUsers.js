@@ -128,9 +128,9 @@ export function useUsers() {
           err.message.includes('Unauthorized')) {
         error.value = 'Authentication failed. Please login again.';
         setTimeout(() => {
-          localStorage.removeItem('auth_token');
-          localStorage.removeItem('access_token');
-          localStorage.removeItem('token');
+          // localStorage.removeItem('auth_token');
+          // localStorage.removeItem('access_token');
+          // localStorage.removeItem('token');
           window.location.href = '/login';
         }, 1500);
       } else {

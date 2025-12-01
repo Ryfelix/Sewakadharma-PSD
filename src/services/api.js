@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://rag-chatbot-be.azurewebsites.net';
+const API_BASE_URL = 'https://chat-layanan-publik.azurewebsites.net';
 
 // Helper untuk get token dari localStorage
 const getAuthToken = () => {
@@ -22,15 +22,17 @@ const getHeaders = () => {
 export const authAPI = {
   // Login
   async login(username, password) {
-    const response = await fetch(
-      `${API_BASE_URL}/auth/login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`,
-      {
-        method: 'POST',
-        headers: {
-          'accept': 'application/json'
-        }
-      }
-    );
+    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'accept': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password
+      })
+    });
     
     if (!response.ok) {
       const error = await response.json();
@@ -38,17 +40,17 @@ export const authAPI = {
     }
     
     const data = await response.json();
-    
+    console.log(data)
     // Response structure from API:
     // {
     //   "admin": { ... },
     //   "token": "eyJhbGc..."
     // }
     
-    if (data.token) {
+    if (data.access_token) {
       // Save token with multiple keys for compatibility
-      localStorage.setItem('auth_token', data.token);
-      localStorage.setItem('authToken', data.token);
+      localStorage.setItem('auth_token', data.access_token);
+      localStorage.setItem('authToken', data.access_token);
       console.log('✅ Token saved successfully');
     } else {
       throw new Error('No token received from server');
